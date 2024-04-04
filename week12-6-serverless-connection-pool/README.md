@@ -119,4 +119,38 @@ https://www.prisma.io/docs/orm/prisma-client/deployment/edge/deploy-to-cloudflar
 
 1. `npm create cloudflare@latest`
 
-2. ``
+2. Install prisma as dev dependencies
+   `npm install prisma --save-dev`
+
+3. Initialize prisma
+   `npx prisma init`
+
+4. Make a model
+
+   ```
+   model log {
+    id      Int    @id @default(autoincrement())
+    level   String
+    message String
+    meta    Json
+    }
+   ```
+
+5. Migrate
+   `npx prisma migrate dev --name init`
+
+   _it will show generated prisma client_
+
+6. Now need to use - prisma Accelerate
+
+**[Docs for - PRISMA ACCELERATE](https://www.prisma.io/docs/accelerate)** - managed connection pooler with global caching that helps speed up database queries. With Accelerate, you can easily configure connection pooling and choose the right cache strategy for your app.
+
+Login ACCELERATE - [Getting started - ACCELERATE](https://www.prisma.io/docs/accelerate/getting-started)
+
+- create new project
+- enable accelerate
+- generate string
+- update DB connectiokn string under wrangler.toml (because it will provide environment things to serverless functions)
+- install prisma accelerate extension
+- generate prisma client with no engine (because we are doing with coudflare workers)
+- 
