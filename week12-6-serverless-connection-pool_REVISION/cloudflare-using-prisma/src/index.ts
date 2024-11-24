@@ -55,11 +55,17 @@ export default {
 
 		// return Response.json(resGot);
 
-		const deleteUser = await prisma.log.deleteMany({
+		const deletedUser = await prisma.log.deleteMany({
 			where: {
-			  email: 'bert@prisma.io',
+				id: {
+					gte: 5, // Replace with the starting ID
+				},
 			},
-		  })
+		});
+
+		console.log(`deletedUser : `, JSON.stringify(deletedUser));
+
+		return Response.json({ deletedUser, logs: resGot, lastCreatedLog: res });
 	},
 };
 
